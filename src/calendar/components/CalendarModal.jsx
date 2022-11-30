@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import Modal from 'react-modal'; //https://www.npmjs.com/package/react-modal
 import { BsSaveFill} from 'react-icons/bs'
+import { addHours } from 'date-fns/esm';
+
+import DatePicker from "react-datepicker"; //https://www.npmjs.com/package/react-datepicker
+import "react-datepicker/dist/react-datepicker.css"; //styles for date
 
 const customStyles = {
     content: {
@@ -18,6 +22,30 @@ const customStyles = {
 export const CalendarModal = () => {
 
     const [isOpen, setOpen] = useState(true)
+
+    const [ formValues, setFormValues ] = useState({ 
+        titles:'',
+        notes:'',
+        start:new Date(),
+        end: addHours( new Date(), 2),
+    });
+
+    const onInputChange = ({ target }) => {
+        setFormValues({
+            ...formValues,
+            [target.name] : target.value
+        });
+    }
+
+    const onDateChange = ( event, changing) =>{ /*
+                                                    will us create a new fuction for date , because propierty target dont exist in the datepick 
+                                                    components
+                                                 */
+        setFormValues({
+            ...formValues,
+            [changing]: event 
+        })
+    }
 
     const onCloseModal = () => {
         console.log('close modal')
@@ -39,12 +67,23 @@ export const CalendarModal = () => {
             <form className="container p-4 mb-2">
                 <div className="flex flex-col mb-2">
                     <label className='font-medium'>Start date and time</label>
-                    <input className="w-full border-b-[1px] border-gray-200" placeholder="Fecha inicio" />
+                    <DatePicker
+                        selected={formValues.start}
+                        className="w-full border-b-[1px] border-gray-200" 
+                        onChange={(event) => onDateChange(event, 'start')}
+                        dateFormat="Pp"
+                    />
                 </div>
 
                 <div className="flex flex-col mb-2">
                     <label className='font-medium'>Finish date and time</label>
-                    <input className="w-full border-b-[1px] border-gray-200" placeholder="Fecha inicio" />
+                    <DatePicker
+                        minDate={ formValues.start }
+                        selected={formValues.start}
+                        className="w-full border-b-[1px] border-gray-200" 
+                        onChange={(event) => onDateChange(event, 'start')}
+                        dateFormat="Pp"
+                    />
                 </div>
 
                 <div className="flex flex-col mb-2">
@@ -55,6 +94,7 @@ export const CalendarModal = () => {
                         placeholder="Título del evento"
                         name="title"
                         autoComplete="off"
+                        onChange={ onInputChange }
                     />
                     <small id="emailHelp" className="text-sm font-medium mt-2">Small descripton</small>
                 </div>
@@ -66,8 +106,9 @@ export const CalendarModal = () => {
                         placeholder="Notas"
                         rows="5"
                         name="notes"
+                        onChange={ onInputChange }
                     ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Add info</small>
+                    <small id="emailHelp" className="text-sm mt-2 text-gray-400">Add info</small>
                 </div>
 
                 <button
