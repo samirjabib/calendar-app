@@ -10,7 +10,6 @@ export const NavBar = () => {
 
 
     const [ isOpen, setOpen ] = useState(false);
-    console.log(isOpen);
 
     const onNavigateLogin = () => {
         navigate('/auth/login')
