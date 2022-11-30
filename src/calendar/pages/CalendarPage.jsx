@@ -6,10 +6,12 @@ import { localizer } from "../../helpers";
 
 import { CalendarEvent } from "../";
 import { CalendarModal } from "../";
-
+import { useUiStore } from "../../hooks";
 
 
 export const CalendarPage = () => {
+
+    const { openDateModal } = useUiStore(); //Import propierties and methods from custom hook.
 
     const events = [{ //Make the events for the calendar
         title:'cumpleaños de mi mama',
@@ -51,11 +53,12 @@ export const CalendarPage = () => {
     
     
     const onDoubleClick = ( event ) => {
-        console.log({ doubleClick: event });
+        console.log({ click: event });
+        openDateModal();
     };
     
     const onSelect = ( event ) => {
-        console.log({ click: event});
+        // console.log({ click: event});
     };
     
     const onViewChanged = (event) => {
@@ -78,7 +81,7 @@ export const CalendarPage = () => {
                 components={{
                     event:CalendarEvent
                 }}
-                onDoubleClick = { onDoubleClick }
+                onDoubleClickEvent = { onDoubleClick }
                 onSelectEvent = { onSelect }
                 onView = { onViewChanged }
                 />

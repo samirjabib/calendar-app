@@ -10,22 +10,17 @@ import DatePicker from "react-datepicker"; //https://www.npmjs.com/package/react
 import "react-datepicker/dist/react-datepicker.css"; //styles for date
 import { differenceInSeconds } from 'date-fns';
 
-// const customStyles = {
-//     content: {
-//     //   top: '50%',
-//     //   left: '50%',
-//     //   right: 'auto',
-//     //   bottom: 'auto',
-//     //   marginRight: '-50%',
-//     //   transform: 'translate(-50%, -50%)',
-//     },
-//   };
+import { useUiStore} from '../../hooks';
 
-  Modal.setAppElement('#root'); //this line helps the modal to overlay on top of the other html elements
+
+
+Modal.setAppElement('#root'); //this line helps the modal to overlay on top of the other html elements
+
 
 export const CalendarModal = () => {
 
-    const [isOpen, setOpen] = useState(true)
+    const { openDateModal, closeDateModal, isDateModalOpen } = useUiStore(); //Import propierties and methos from custom hook
+
     const [ formSubmitted, setFormSubmitted ] = useState(true)
 
     const [ formValues, setFormValues ] = useState({ 
@@ -44,7 +39,6 @@ export const CalendarModal = () => {
 
     const titleClass = useMemo( () => {
         if(!formSubmitted) return '';
-        console.log('samir')
 
         return( formValues.title.length > 0)
             ? ''
@@ -62,8 +56,7 @@ export const CalendarModal = () => {
     }
 
     const onCloseModal = () => {
-        console.log('close modal')
-        setOpen(false)
+        closeDateModal();
     }
 
     const onSubmit = ( event )=> {
@@ -84,7 +77,7 @@ export const CalendarModal = () => {
 
     return(
         <Modal
-            isOpen={isOpen}
+            isOpen={ isDateModalOpen }
             onRequestClose={onCloseModal}
             // style={ customStyles }
             className="flex items-center justify-center flex-col bg-white w-80 max-h-[45rem] rounded-sm"
