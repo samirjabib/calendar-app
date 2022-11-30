@@ -1,33 +1,20 @@
 import { useState } from "react";
 import { Calendar } from "react-big-calendar";
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { addHours, set } from 'date-fns' //these  libraries help us to managent the date
 import { localizer } from "../../helpers";
 
 import { CalendarEvent } from "../";
 import { CalendarModal } from "../";
 import { useUiStore } from "../../hooks";
+import { useCalendarStore } from "../../hooks/useCalendarStore";
 
 
 export const CalendarPage = () => {
 
     const { openDateModal } = useUiStore(); //Import propierties and methods from custom hook.
 
-    const events = [{ //Make the events for the calendar
-        title:'cumpleaños de mi mama',
-        notes:'comprar el pastel',
-        start: new Date(),
-        end: addHours(new Date(), 2),  /*
-                                            These method receive two params , the first is the object Date, the second the number of hours
-                                            to finish. 
-                                        */
-        bgColor:'#22d3ee',
-        user:{
-            _id:'123',
-            name:'samir'
-    
-        }
-    }]
+    const { events } = useCalendarStore();
+
 
     const [lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week') 
                                                                                             /*
