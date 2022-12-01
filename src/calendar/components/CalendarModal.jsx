@@ -89,7 +89,7 @@ export const CalendarModal = () => {
             isOpen={ isDateModalOpen }
             onRequestClose={onCloseModal}
             // style={ customStyles }
-            className="flex items-center justify-center flex-col bg-white w-80 max-h-[45rem] rounded-sm"
+            className="flex items-center justify-center flex-col bg-white w-80 max-h-[45rem] rounded-2xl"
             overlayClassName="modal-fondo"
             closeTimeoutMS={ 200 }
 
@@ -101,7 +101,7 @@ export const CalendarModal = () => {
                     <label className='font-medium'>Start date and time</label>
                     <DatePicker
                         selected={formValues.start}
-                        className="w-full border-b-[1px] border-gray-200" 
+                        className="w-full border-b-[1px] border-gray-200 p-2" 
                         onChange={(event) => onDateChanged(event, 'start')}
                         dateFormat="Pp"
                         showTimeSelect
@@ -113,7 +113,7 @@ export const CalendarModal = () => {
                     <DatePicker
                         minDate={ formValues.start }
                         selected={formValues.end}
-                        className="w-full border-b-[1px] border-gray-200" 
+                        className="w-full border-b-[1px] border-gray-200 p-2" 
                         onChange={ (event) => onDateChanged(event, 'end') }
                         dateFormat="Pp"
                         showTimeSelect
@@ -125,7 +125,7 @@ export const CalendarModal = () => {
                     <label className='font-medium'>Title and notes</label>
                     <input 
                         type="text" 
-                        className={`w-full border-b-[1px] border-gray-200 ${titleClass} `}
+                        className={`w-full border-b-[1px] border-gray-200 ${titleClass} p-2`}
                         placeholder="Título del evento"
                         name="title"
                         autoComplete="off"
@@ -137,7 +137,7 @@ export const CalendarModal = () => {
                 <div className="flex flex-col w-full">
                     <textarea 
                         type="text" 
-                        className="border-[1px] border-gray-200 rounded"
+                        className="border-[1px] border-gray-200 rounded p-2"
                         placeholder="Notas"
                         rows="5"
                         name="notes"
