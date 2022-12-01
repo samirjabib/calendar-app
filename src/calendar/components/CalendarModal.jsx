@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import Modal from 'react-modal'; //https://www.npmjs.com/package/react-modal
 import { BsSaveFill} from 'react-icons/bs'
 import { addHours } from 'date-fns/esm';
@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css"; //styles for date
 import { differenceInSeconds } from 'date-fns';
 
 import { useUiStore} from '../../hooks';
+import { useCalendarStore } from '../../hooks/useCalendarStore';
 
 
 
@@ -19,16 +20,21 @@ Modal.setAppElement('#root'); //this line helps the modal to overlay on top of t
 
 export const CalendarModal = () => {
 
-    const { openDateModal, closeDateModal, isDateModalOpen } = useUiStore(); //Import propierties and methos from custom hook
+    const { closeDateModal, isDateModalOpen } = useUiStore(); //Import propierties and methos from custom hook
+    const { activeEvent, startAddEvent } = useCalendarStore()
 
     const [ formSubmitted, setFormSubmitted ] = useState(true)
 
     const [ formValues, setFormValues ] = useState({ 
-        title:'',
-        notes:'',
+        title:'Samir',
+        notes:'Jabib',
         start: new Date(),
         end: addHours( new Date(), 2),
     });
+
+    useEffect(() => {
+
+    }, [activeEvent])
 
     const onInputChange = ({ target }) => {
         setFormValues({
@@ -36,6 +42,9 @@ export const CalendarModal = () => {
             [target.name] : target.value
         });
     }
+
+
+
 
     const titleClass = useMemo( () => {
         if(!formSubmitted) return '';
@@ -137,16 +146,36 @@ export const CalendarModal = () => {
                     <small id="emailHelp" className="text-sm mt-2 text-gray-400">Add info</small>
                 </div>
 
-                <button
-                    type="submit"
-                    className="flex flex-row items-center justify-center border-2 px-2 mt-2 rounded
-                    text-cyan-400 hover:text-cyan-500 border-[#49d9f1] hover:bg-black/10
-                    "
-                >
-                    <BsSaveFill size={15} color={'#49d9f1'}/>
-                    <span className='font-semibold '>Save</span>
-                </button>
+                <div className='flex  w-full justify-between'>
+                    <button
+                        type="submit"
+                        className="flex flex-row items-center justify-center border-2 px-6 gap-2 mt-2 rounded py-2
+                        text-cyan-400 hover:text-cyan-500 border-[#49d9f1] hover:bg-black/10
+                        "
+                    >
+                        <BsSaveFill size={15} color={'#49d9f1'}/>
+                        <span className='font-semibold '>Save</span>
+                    </button>
 
+                    <button
+                        type="submit"
+                        className="flex flex-row items-center justify-center border-2 px-2 mt-2 rounded
+                        text-yellow-400  border-yellow-400 hover:bg-black/10
+                        "
+                    >
+                        <span className='font-semibold '>Update</span>
+                    </button>
+    
+                    <button
+                        type="submit"
+                        className="flex flex-row items-center justify-center border-2 px-2 mt-2 rounded
+                        text-red-500  border-red-500 hover:bg-black/10
+                        "
+                    >
+            
+                        <span className='font-semibold '>Delete</span>
+                    </button>
+                </div>
             </form>
 
         </Modal>

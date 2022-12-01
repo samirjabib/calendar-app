@@ -7,14 +7,15 @@ import { CalendarEvent } from "../";
 import { CalendarModal } from "../";
 import { useUiStore } from "../../hooks";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
-
+import { onSetActiveEvent } from "../../store";
 
 export const CalendarPage = () => {
 
     const { openDateModal } = useUiStore(); //Import propierties and methods from custom hook.
 
-    const { events } = useCalendarStore();
-
+    const { events, setActiveEvents } = useCalendarStore();
+    console.log(events)
+    
 
     const [lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week') 
                                                                                             /*
@@ -44,11 +45,12 @@ export const CalendarPage = () => {
         openDateModal();
     };
     
-    const onSelect = ( event ) => {
-        // console.log({ click: event});
+    const onSelect = ( event ) => { //this function select the event when i have to sent to my functions to contain the data to posterior send to reducers. 
+        onSetActiveEvent(event);
+        console.log(event)
     };
     
-    const onViewChanged = (event) => {
+    const onViewChanged = (event) => { //grab the event from the ui, in this case when the view change. 
         localStorage.setItem('lastView', event); //we save in the localstorage the view when this change
     }
 
@@ -56,22 +58,23 @@ export const CalendarPage = () => {
     
     return(
         <>
-            <div className="p-4">
+            <div className="p-4 relative">
                 <Calendar
                 localizer={localizer}
-                events={events}
+                events={ events }
                 defaultView = {lastView}
                 startAccessor="start"
                 endAccessor="end"
                 style={{ height: 'calc( 100vh - 80px )' }}
                 eventPropGetter={ eventsStyleGetter }
-                components={{
+                components={{ 
                     event:CalendarEvent
                 }}
                 onDoubleClickEvent = { onDoubleClick }
                 onSelectEvent = { onSelect }
                 onView = { onViewChanged }
                 />
+
             </div>
             <CalendarModal/>
         </>

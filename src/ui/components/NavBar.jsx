@@ -1,19 +1,29 @@
-import { AiOutlineCalendar } from 'react-icons/ai'
 import { Turn as Hamburger } from 'hamburger-react'
-import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
+import { ListNavDefault } from './ListNavDefault';
+import { IconAddData } from '../../calendar';
+
 
 
 export const NavBar = () => {
 
-    const navigate = useNavigate();
 
+    const log = 'active'
+    console
+
+
+
+    const getListNavbar = () => {
+        if( log === 'active'){
+            return <IconAddData/>
+        } else {
+            return <ListNavDefault/>
+        }
+    }
 
     const [ isOpen, setOpen ] = useState(false);
 
-    const onNavigateLogin = () => {
-        navigate('/auth/login')
-    }
+ 
 
 
     const onToggle = (toogle) => {
@@ -24,7 +34,6 @@ export const NavBar = () => {
             setOpen(false)
         }
     }
-
 
 
     return(
@@ -56,25 +65,10 @@ export const NavBar = () => {
                         `}
 
                 >  
+                
+                {getListNavbar()}
 
-                    <li className="mx-4 my-6 md:my-0">
-                        <Link to='/' className="text-xl hover:text-cyan-500 duration-500">
-                            Calendar
-                        </Link>
-                    </li>
-                    <li className="mx-4 my-6 md:my-0">
-                        <Link to='/auth/register' className="text-xl hover:text-cyan-500 duration-500">
-                            Register
-                        </Link>
-                    </li>
-
-                    <button 
-                        className="bg-cyan-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-cyan-500 rounded  "
-                        onClick={onNavigateLogin}
-                        >
-                         Login
-                    </button>
-
+          
 
                 </ul>
 
