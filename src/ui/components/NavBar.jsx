@@ -2,14 +2,14 @@ import { Turn as Hamburger } from 'hamburger-react'
 import { useState } from 'react';
 import { ListNavDefault } from './ListNavDefault';
 import { IconAddData } from '../../calendar';
+import { useUiStore } from '../../hooks';
 
+const log = 'active'
 
 
 export const NavBar = () => {
-
-
-    const log = 'active'
-    console
+    
+    const [ isOpen, setOpen ] = useState(false);
 
 
 
@@ -21,7 +21,8 @@ export const NavBar = () => {
         }
     }
 
-    const [ isOpen, setOpen ] = useState(false);
+    
+
 
  
 
@@ -67,8 +68,6 @@ export const NavBar = () => {
                 >  
                 
                 {getListNavbar()}
-
-          
 
                 </ul>
 

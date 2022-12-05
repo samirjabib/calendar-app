@@ -15,11 +15,19 @@ export const useCalendarStore = () => {
         //TODO: GO TO BACK
 
 
-        //If is right
+        //If the data exist update, if not exists create data. 
 
         if( calendarEvent._id){
             dispatch( onUpdateEvent({...calendarEvent})) //update element return to reducers by means of the payload. 
+        } else {
+            dispatch(onAddEvent({...calendarEvent, _id:new Date().getTime()}))//Send the object to reducer for update the state.
         }
+    }
+
+    const onDeletingEvent = () => { //Send the payload
+
+        //todo llegar al backend
+        dispatch( onDeleteEvent())
     }
 
 
@@ -30,7 +38,8 @@ export const useCalendarStore = () => {
 
         //methods
         setActiveEvents, //this method contain the payload of reducer.
-        startAddEvent
+        startAddEvent,
+        onDeletingEvent,
 
     }
 } 

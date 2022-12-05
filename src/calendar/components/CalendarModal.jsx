@@ -21,7 +21,7 @@ Modal.setAppElement('#root'); //this line helps the modal to overlay on top of t
 export const CalendarModal = () => {
 
     const { closeDateModal, isDateModalOpen } = useUiStore(); //Import propierties and methos from custom hook
-    const { activeEvent, startAddEvent } = useCalendarStore()
+    const { activeEvent, startAddEvent, onDeletingEvent  } = useCalendarStore()
 
     const [ formSubmitted, setFormSubmitted ] = useState(true)
 
@@ -68,7 +68,11 @@ export const CalendarModal = () => {
         closeDateModal();
     }
 
-    const onSubmit = ( event )=> {
+    const deleteEvent = () => {
+        onDeletingEvent();
+    }
+
+    const onSubmit = async ( event )=> {
          event.preventDefault();
 
         const difference = differenceInSeconds( formValues.end, formValues.start );
@@ -79,9 +83,10 @@ export const CalendarModal = () => {
 
          if(formValues.title.length <= 0) return;
 
-         console.log(formValues);
+        await startAddEvent();
+        closeDateModal();
         setFormSubmitted(false)
-    
+
     }
 
     return(
@@ -146,7 +151,7 @@ export const CalendarModal = () => {
                     <small id="emailHelp" className="text-sm mt-2 text-gray-400">Add info</small>
                 </div>
 
-                <div className='flex  w-full justify-between'>
+                <div className='flex  w-full justify-around'>
                     <button
                         type="submit"
                         className="flex flex-row items-center justify-center border-2 px-6 gap-2 mt-2 rounded py-2
@@ -157,14 +162,6 @@ export const CalendarModal = () => {
                         <span className='font-semibold '>Save</span>
                     </button>
 
-                    <button
-                        type="submit"
-                        className="flex flex-row items-center justify-center border-2 px-2 mt-2 rounded
-                        text-yellow-400  border-yellow-400 hover:bg-black/10
-                        "
-                    >
-                        <span className='font-semibold '>Update</span>
-                    </button>
     
                     <button
                         type="submit"
@@ -173,7 +170,10 @@ export const CalendarModal = () => {
                         "
                     >
             
-                        <span className='font-semibold '>Delete</span>
+                        <span className='font-semibold'
+                            onClick={deleteEvent()}
+                        
+                        >Delete</span>
                     </button>
                 </div>
             </form>
