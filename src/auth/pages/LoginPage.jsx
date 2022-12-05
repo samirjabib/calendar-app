@@ -10,10 +10,15 @@ export const LoginPage = () => {
 
     const {email, password, onInputChange , onResetForm } = useForm( loginFormFields );
 
+    const onSubmit = (event) => {
+        event.preventDefault()
+        console.log(email, password);
+    }
+
 
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700 z-">
-            <form className="flex flex-col bg-white rounded shadow-lg p-12 mt-12" action="">
+            <form className="flex flex-col bg-white rounded shadow-lg p-12 mt-12" onSubmit={onSubmit}>
                 <label className="font-semibold text-xs" htmlFor='userName '>Username or Email</label>
                 <input className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text"/>
                 <label className="font-semibold text-xs mt-3" htmlFor="passwordField">Password</label>
