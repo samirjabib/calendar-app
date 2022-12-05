@@ -43,12 +43,16 @@ export const useForm = (initialForm = {}, formValidations = {} ) => {
         setFormValidation( formCheckedValues ); //Enviamos nuestars validaciones al form validation.
     }
 
-    const onInputChange = ( {target }) => {
+    const onInputChange = ( {target }) => { //Extraemos el value del target de nuestros input. 
         const { name, value } = target;
         setFormState({
             ...formState,
             [name] : value
         });
+    };
+
+    const onResetForm = () => {
+        setFormState(initialForm);
     };
 
     return {

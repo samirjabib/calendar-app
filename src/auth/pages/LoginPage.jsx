@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+
+const loginFormFields = {
+    email:'',
+    password:'',
+}
 
 export const LoginPage = () => {
+
+    const {email, password, onInputChange , onResetForm } = useForm( loginFormFields );
+
+
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700 z-">
             <form className="flex flex-col bg-white rounded shadow-lg p-12 mt-12" action="">
