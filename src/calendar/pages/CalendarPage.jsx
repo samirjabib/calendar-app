@@ -28,8 +28,8 @@ export const CalendarPage = () => {
 
     
         const style = { //styles event
-            backgroundColor:'#22d3ee',
-            borderRadius:'0px',
+            backgroundColor:'#22c55e',
+            borderRadius:'4px',
             opacity:0.8
     
         }

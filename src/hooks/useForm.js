@@ -7,7 +7,6 @@ export const useForm = (initialForm = {}, formValidations = {} ) => {
     const [ formState, setFormState ] = useState(initialForm);
     const [ formValidation, setFormValidation ] = useState({});
 
-
     useEffect( () => {
         createValidators(); //Con esta funcion hacemos que cada vez que cambie el form , nosotros volvemos a correr la funcion de los validaores
     }, [ formState ])
