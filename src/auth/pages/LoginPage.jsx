@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
+import { useAuthStore } from "../hooks/useAuthStore";
 
 const loginFormFields = {
     email:'',
@@ -10,11 +11,13 @@ const loginFormFields = {
 export const LoginPage = () => {
 
     const {email, password, onInputChange , onResetForm } = useForm( loginFormFields );
-
+    const {  startLogin } = useAuthStore();
 
     const onSubmit = (event) => {
         event.preventDefault()
-        console.log({email, password});
+        // startLogin({ email, password });
+        startLogin({ email, password})
+        onResetForm();
     }
 
 

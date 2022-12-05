@@ -10,7 +10,7 @@ export const authSlice = createSlice({
     },
     reducers:{
         onChecking : (state ) => { 
-            state.status = 'checking';  /
+            state.status = 'checking';  
             state.user = {};
             state.errorMessage = undefined;
         },
@@ -22,9 +22,9 @@ export const authSlice = createSlice({
         onLogout: ( state, { payload }) => {
             state.status = 'not-authenticated';
             state.user = {};
-            state.errorMessage =payload; //Traemos el error del payload. 
+            state.errorMessage = payload; //Traemos el error del payload. 
         },
-        clearErrorMessage: ( state) => {
+        clearErrorMessage: ( state ) => {
             state.errorMessage = undefined;
         }
     }
