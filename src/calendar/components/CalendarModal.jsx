@@ -21,19 +21,22 @@ Modal.setAppElement('#root'); //this line helps the modal to overlay on top of t
 export const CalendarModal = () => {
 
     const { closeDateModal, isDateModalOpen } = useUiStore(); //Import propierties and methos from custom hook
-    const { activeEvent, startAddEvent, startDeletingEvent  } = useCalendarStore()
+    const { activeEvent, startAddEvent } = useCalendarStore()
 
     const [ formSubmitted, setFormSubmitted ] = useState(true)
+    console.log(activeEvent)
 
     const [ formValues, setFormValues ] = useState({ 
-        title:'Samir',
-        notes:'Jabib',
+        title:' ',
+        notes:' ',
         start: new Date(),
         end: addHours( new Date(), 2),
     });
 
     useEffect(() => {
-
+        if( activeEvent !== null) {
+            setFormValues({...activeEvent});
+        }
     }, [activeEvent])
 
     const onInputChange = ({ target }) => {
@@ -49,7 +52,7 @@ export const CalendarModal = () => {
     const titleClass = useMemo( () => {
         if(!formSubmitted) return '';
 
-        return( formValues.title.length > 0)
+        return( formValues.title > 0)
             ? ''
             : 'border-red-500 rounded border-[1px]'
     },[ formValues.title, formSubmitted ])
@@ -69,11 +72,12 @@ export const CalendarModal = () => {
     }
 
     const deleteEvent = () => {
-        startDeletingEvent();
     }
 
     const onSubmit = async ( event )=> {
          event.preventDefault();
+         setFormSubmitted(true)
+
 
         const difference = differenceInSeconds( formValues.end, formValues.start );
         if( isNaN( difference)||difference <=0 ) { 
@@ -83,9 +87,10 @@ export const CalendarModal = () => {
 
          if(formValues.title.length <= 0) return;
 
-        await startAddEvent();
+        await startAddEvent( formValues );
         closeDateModal();
         setFormSubmitted(false)
+
 
     }
 
@@ -134,6 +139,7 @@ export const CalendarModal = () => {
                         placeholder="Título del evento"
                         name="title"
                         autoComplete="off"
+                        value={formValues.title}
                         onChange={ onInputChange }
                     />
                     <small id="emailHelp" className="text-sm font-medium mt-2">Small descripton</small>
@@ -146,6 +152,7 @@ export const CalendarModal = () => {
                         placeholder="Notas"
                         rows="5"
                         name="notes"
+                        value={formValues.notes}
                         onChange={ onInputChange }
                     ></textarea>
                     <small id="emailHelp" className="text-sm mt-2 text-gray-400">Add info</small>
@@ -157,6 +164,7 @@ export const CalendarModal = () => {
                         className="flex flex-row items-center justify-center border-2 px-6 gap-2 mt-2 rounded py-2
                         text-cyan-400 hover:text-cyan-500 border-[#49d9f1] hover:bg-black/10
                         "
+                        onClick={onSubmit}
                     >
                         <BsSaveFill size={15} color={'#49d9f1'}/>
                         <span className='font-semibold '>Save</span>

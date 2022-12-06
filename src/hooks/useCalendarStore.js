@@ -8,64 +8,30 @@ import { calendarApi } from "../api";
 export const useCalendarStore = () => {
 
     const dispatch = useDispatch();
-    const { events } = useSelector(state  => state.calendar)
+    const { events, activeEvent } = useSelector(state  => state.calendar)
     const { user } = useSelector( state => state.auth )
+    console.log(activeEvent)
 
-    const setActiveEvents = (calendarEvent) => { 
+    const setActiveEvent = (calendarEvent) => { 
         dispatch(onSetActiveEvent(calendarEvent)); //return data to reducers with dispatch hook..
     }
 
     const startAddEvent = async( calendarEvent ) => {
         //TODO: GO TO BACK
+        console.log(calendarEvent)
 
-
-        //If the data exist update, if not exists create data. 
-        try{    
-            if( calendarEvent._id){
-                //update event
-                await calendarApi.put(`event/${calendarEvent.id}`, calendarEvent);
-                dispatch(onUpdateEvent({...calendarEvent}, user));
-            } else {
-                //create event
-                const { data } = await calendarApi.post('/events', calendarEvent);
-                dispatch( onAddEvent({...calendarEvent, id: data.event.id, user}));
-            }
-        }catch(error){
-            console.log(error)
-            Swal.fire('error when saving', error.response.data.msg , 'error');
-        }
-     
     }
 
-    const startDeletingEvent = async() => { //Send the payload
-        try{
-            await calendarApi.delete(`event/${calendarEvent.id}`)
-            dispatch( onDeleteEvent());
-        } catch(error) {
-            console.log(error);
-            Swal.fire('error when saving', error.response.data.msg, 'error');
-        }
-        //todo llegar al backend
-    }
 
-    const startLoadingEvents = async() => {
-        try{
-            console.log('event save')
-        } catch(error) {
-            console.log('error charging events');
-            console.log(error)
-        }
-    }
     
     return{
         //Propierties
         events,
+        activeEvent,
 
         //methods
-        setActiveEvents, //this method contain the payload of reducer.
+        setActiveEvent, //this method contain the payload of reducer.
         startAddEvent,
-        startDeletingEvent,
-        startLoadingEvents,
 
     }
 } 

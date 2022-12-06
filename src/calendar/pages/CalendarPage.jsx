@@ -13,7 +13,7 @@ export const CalendarPage = () => {
 
     const { openDateModal } = useUiStore(); //Import propierties and methods from custom hook.
 
-    const { events, setActiveEvents } = useCalendarStore();
+    const { events, setActiveEvent } = useCalendarStore();
     
 
     const [lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week') 
@@ -46,7 +46,7 @@ export const CalendarPage = () => {
     
     const onSelect = ( event ) => { //this function select the event when i have to sent to my functions to contain the data to posterior send to reducers. 
         onSetActiveEvent(event);
-        console.log(event)
+        setActiveEvent(event)
     };
     
     const onViewChanged = (event) => { //grab the event from the ui, in this case when the view change. 
