@@ -14,10 +14,10 @@ export const LoginPage = () => {
     const {  startLogin } = useAuthStore();
 
     const onSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         // startLogin({ email, password });
-        startLogin({ email, password})
-        onResetForm();
+        startLogin({ email, password}) //send the data to payload.
+        onResetForm(); //reset form after peticion. 
     }
 
 
@@ -43,7 +43,7 @@ export const LoginPage = () => {
                 <div className="flex mt-6 justify-center text-xs">
                     <Link className="text-blue-400 hover:text-blue-500" >Forgot Password</Link>
                     <span className="mx-2 text-gray-300">/</span>
-                    <Link className="text-blue-400 hover:text-blue-500" >Register</Link>
+                    <Link className="text-blue-400 hover:text-blue-500" to='/register' >Register</Link>
                 </div>
             </form>
         </div>
