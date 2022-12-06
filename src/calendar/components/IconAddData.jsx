@@ -7,10 +7,11 @@ export const IconAddData = () => {
 
     const { openDateModal } = useUiStore();
     const { startLogout } = useAuthStore();
-
+    const { setActiveEvent  } = useCalendarStore()
 
     const openModal = () => {
         openDateModal();
+        setActiveEvent(null)
     }
 
     return(
@@ -20,7 +21,7 @@ export const IconAddData = () => {
                     className='bg-green-500 text-sm shadow text-white font-[Poppins] duration-500 px-9 py-[1em]  mx-[1em] hover:bg-green-700 rounded w-42 '
                     onClick={openModal}
                 >
-                    Add Events
+                    Add Event
                 </button>
 
                 <button 

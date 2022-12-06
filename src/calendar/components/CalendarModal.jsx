@@ -17,6 +17,12 @@ import { useCalendarStore } from '../../hooks/useCalendarStore';
 
 Modal.setAppElement('#root'); //this line helps the modal to overlay on top of the other html elements
 
+const initialForm = {
+    title:' ',
+    notes:' ',
+    start: new Date(),
+    end: addHours( new Date(), 2),
+}
 
 export const CalendarModal = () => {
 
@@ -24,18 +30,15 @@ export const CalendarModal = () => {
     const { activeEvent, startAddEvent } = useCalendarStore()
 
     const [ formSubmitted, setFormSubmitted ] = useState(true)
-    console.log(activeEvent)
 
-    const [ formValues, setFormValues ] = useState({ 
-        title:' ',
-        notes:' ',
-        start: new Date(),
-        end: addHours( new Date(), 2),
-    });
+    const [ formValues, setFormValues ] = useState(initialForm);
 
     useEffect(() => {
         if( activeEvent !== null) {
             setFormValues({...activeEvent});
+        }
+        if(activeEvent === null){
+            setFormValues({initialForm})
         }
     }, [activeEvent])
 
