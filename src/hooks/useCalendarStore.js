@@ -1,6 +1,7 @@
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { onSetActiveEvent, onAddEvent , onUpdateEvent, onDeleteEvent } from "../store";
 import Swal from "sweetalert2";
+import { calendarApi } from "../api";
 
 
 
@@ -36,14 +37,26 @@ export const useCalendarStore = () => {
      
     }
 
-    const startDeletingEvent = () => { //Send the payload
-
+    const startDeletingEvent = async() => { //Send the payload
+        try{
+            await calendarApi.delete(`event/${calendarEvent.id}`)
+            dispatch( onDeleteEvent());
+        } catch(error) {
+            console.log(error);
+            Swal.fire('error when saving', error.response.data.msg, 'error');
+        }
         //todo llegar al backend
-        dispatch( onDeleteEvent())
     }
 
-
-
+    const startLoadingEvents = async() => {
+        try{
+            console.log('event save')
+        } catch(error) {
+            console.log('error charging events');
+            console.log(error)
+        }
+    }
+    
     return{
         //Propierties
         events,
@@ -52,6 +65,7 @@ export const useCalendarStore = () => {
         setActiveEvents, //this method contain the payload of reducer.
         startAddEvent,
         startDeletingEvent,
+        startLoadingEvents,
 
     }
 } 

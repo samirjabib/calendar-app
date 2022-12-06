@@ -24,7 +24,7 @@ export const AppRouter = () => {
 
     return(
             <Routes>
-                {/* with this component we can nested routes   */}
+                {/* with this component we can nested routes   */}  
             {
                 (status === 'not-authenticated')
                     ?
