@@ -14,13 +14,11 @@ const regitsterFormFields = {
 export const RegisterPage = () => {
 
     const { onInputChange, name, email, password, confirmPassword } = useForm(regitsterFormFields);
-
-    const { startRegister } = useAuthStore();
-
-
+    const { startRegister, errorMessage } = useAuthStore();
 
     const onSubmit = ( event ) => {
         event.preventDefault()
+        console.log('hice submit')
         if( password !== confirmPassword ){
             Swal.fire('Wrong Fields', "Password don't match", 'error')
             return;
@@ -30,7 +28,11 @@ export const RegisterPage = () => {
 
     }
 
-
+    useEffect( () => {
+        if( errorMessage !== undefined ) {
+            Swal.fire('Error in the Auth', errorMessage, 'error');
+        }
+    }, [errorMessage])
 
     return(
         <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700 z-0">

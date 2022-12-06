@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useForm } from "../../hooks/useForm";
 import { useAuthStore } from "../hooks/useAuthStore";
 
@@ -11,7 +13,7 @@ const loginFormFields = {
 export const LoginPage = () => {
 
     const {email, password, onInputChange , onResetForm } = useForm( loginFormFields );
-    const {  startLogin } = useAuthStore();
+    const {  startLogin, errorMessage } = useAuthStore();
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -20,6 +22,12 @@ export const LoginPage = () => {
         onResetForm(); //reset form after peticion. 
     }
 
+
+    useEffect( () => {
+        if( errorMessage !== undefined ) {//this funciton is activated when the errorMessage state change. 
+            Swal.fire('Error in the Auth', errorMessage, 'error'); //use swal for the alert.
+        }
+    }, [errorMessage])
 
 
     return (

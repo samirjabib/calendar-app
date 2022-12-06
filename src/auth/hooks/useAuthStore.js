@@ -7,21 +7,10 @@ import axios from "axios";
 export const useAuthStore = () => {
 
     const { status, user, errorMessage } = useSelector( state => state.auth );
+    
 
     const dispatch = useDispatch();
 
-
-    // const startLogin = async({ email, password }) => {
-    //     dispatch(onChecking());
-    //     try{
-    //         const { data } = await calendarApi.post('/auth', { email, password });
-    //         console.log(data);
-    //         dispatch(onLogin({name: data.name, uid: data.uid }))
-
-    //     } catch(error) {
-    //         console.log(error);
-    //     }
-    // }
     const startLogin = async({ email, password }) => {
         dispatch( onChecking() );
         try {
@@ -41,13 +30,14 @@ export const useAuthStore = () => {
 
     const startRegister = async({email, password, name}) => {
         dispatch(onChecking());
-
+        console.log({email,password,name})
         try{
             const { data } = await calendarApi.post('/auth/register', { email, password, name});
+            console.log(data)
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime())
             dispatch(onLogin({name: data.name, uid: data.uid}))
-
+            console.log('user created')
 
         } catch(error) {
             dispatch( onLogout(error.response.data?.msg || '--') );
