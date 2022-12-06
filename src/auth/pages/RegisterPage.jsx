@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom"
-import { useAuthStore } from "../hooks/useAuthStore"
-import { useForm } from '../../hooks/useForm'
+import { Link } from "react-router-dom";
+import { useAuthStore } from "../hooks/useAuthStore";
+import { useForm } from '../../hooks/useForm';
+import Swal from 'sweetalert2';
+import { useEffect } from "react";
 
 const regitsterFormFields = {
     name:'',
     email:'',
     password:'',
     confirmPassword:'',
-    
 }
 
 export const RegisterPage = () => {
@@ -20,11 +21,15 @@ export const RegisterPage = () => {
 
     const onSubmit = ( event ) => {
         event.preventDefault()
-        IF( password !== confirmPassword ){
+        if( password !== confirmPassword ){
             Swal.fire('Wrong Fields', "Password don't match", 'error')
-        }
+            return;
+        };
+
+        startRegister({ name, email, password })
 
     }
+
 
 
     return(

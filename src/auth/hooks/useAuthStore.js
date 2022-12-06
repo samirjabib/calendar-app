@@ -64,7 +64,7 @@ export const useAuthStore = () => {
         if(!token) return dispatch( onLogout());
 
         try{
-            
+
             const { data } = await calendarApi.get('auth/re-validate');
             localStorage.setItem('token', data.data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
@@ -76,6 +76,8 @@ export const useAuthStore = () => {
     }
 
     return{
+        errorMessage,
+
         startLogin,
         startRegister,
         checkAuthToken,
