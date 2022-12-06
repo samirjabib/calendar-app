@@ -7,7 +7,7 @@ const { VITE_API_URL } = getEnvVariables()
 
 
 const calendarApi = axios.create({
-    baseURL: VITE_API_URL
+    baseURL: "https://calendar-backend-test.up.railway.app/api/v1"
 });
 
 // Todo: configurar interceptores
