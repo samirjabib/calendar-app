@@ -21,7 +21,7 @@ Modal.setAppElement('#root'); //this line helps the modal to overlay on top of t
 export const CalendarModal = () => {
 
     const { closeDateModal, isDateModalOpen } = useUiStore(); //Import propierties and methos from custom hook
-    const { activeEvent, startAddEvent, onDeletingEvent  } = useCalendarStore()
+    const { activeEvent, startAddEvent, startDeletingEvent  } = useCalendarStore()
 
     const [ formSubmitted, setFormSubmitted ] = useState(true)
 
@@ -69,7 +69,7 @@ export const CalendarModal = () => {
     }
 
     const deleteEvent = () => {
-        onDeletingEvent();
+        startDeletingEvent();
     }
 
     const onSubmit = async ( event )=> {

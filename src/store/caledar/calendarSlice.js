@@ -20,6 +20,7 @@ const tempEvent =   {
 export const calendarSlice = createSlice({
     name: 'calendar',
     initialState: {
+        isLoadingEvents:true,
         events: [
             tempEvent
         ],
@@ -51,6 +52,22 @@ export const calendarSlice = createSlice({
                 state.events = state.events.filter( event => event._id === payload._id) //filter the data by operation of equals id, the id from store data, and the payload.
                 state.activeEvent = null; // off data.
             }
+        },
+        onLoadEvents : ( state, {payload = {}}) => {
+            state.isLoadingEvents = false;
+
+            payload.forEach( event => {
+                const exists = state.events.some( dbEvent => dbEvent.id === event.id);
+                if(!exists){
+                    state.events.push(event);
+                }
+            })
+        },
+
+        onLogoutCalendar: ( state ) => {
+            state.isLoadingEvents = true,
+            state.events = [],
+            state.activeEvent = null
         },
     }
 });
