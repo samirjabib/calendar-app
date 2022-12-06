@@ -1,25 +1,17 @@
 import axios from 'axios';
-import { getEnvVariables } from '../helpers';
-
-const { VITE_API_URL } = getEnvVariables()
-
-
 
 
 const calendarApi = axios.create({
     baseURL: "https://calendar-backend-test.up.railway.app/api/v1"
 });
 
-// Todo: configurar interceptores
-// calendarApi.interceptors.request.use( config => { //Usamos los interceptores de axios.
-
-//     config.headers = {
-//         ...config.headers, //Devolvemos una copia de los headers por si existen algun otro, que no se pierda
-//         'x-token': localStorage.getItem('token') //Seteamos el token dentro de nuestro storage.
-//     }
-
-//     return config; //Retornamos la configuracion. 
-// })
+calendarApi.interceptors.request.use( config => { //Whill this funcion intercepts the request from the client to the server.
+    config.headers = {
+        ...config.headers, //we keep a copy of the headers for the maintenance of other headers
+        "x-token": localStorage.getItem('token') // save the token in the localstore.
+    };
+    return config 
+})
 
 
 export default calendarApi;

@@ -1,22 +1,48 @@
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom"
 
-import { AuthRoutes } from "../auth";
+import { AuthRoutes, useAuthStore } from "../auth";
 import { CalendarPage } from "../calendar";
 
 
 export const AppRouter = () => {
-    const authStatus = 'user';
+
+
+    const { status, checkAuthToken } = useAuthStore();
+
+    console.log(status)
+
+    useEffect(() => {
+        checkAuthToken();
+    }, [])
+    
+
+
+    if( status === 'checking'){
+        return <h3>Loading...</h3>
+    }
 
     return(
             <Routes>
                 {/* with this component we can nested routes   */}
             {
-                (authStatus === 'admin')
-                    ? <Route path="/*" element={<CalendarPage/>}/>
-                    : <Route path="/auth/*" element={<AuthRoutes/>}/>
+                (status === 'not-authenticated')
+                    ?
+                        (
+                            <>
+                                <Route path="/*" element={<Navigate to="/auth/login"/>}/>
+                                <Route path="/auth/*" element={<AuthRoutes/>}/>
+                            </>
+                        ) 
+                    : 
+                        (
+                            <>
+                                <Route path="/" element={<CalendarPage/>}/>
+                                <Route path="/*" element={<Navigate to='/'/>}/>    
+                            </>              
+                        )
                     
             }
-                <Route path="/*" element={<Navigate to="/auth/login"/>}/>
                                                                         {/* 
                                                                             The componet route have two propierties path and element
                                                                             

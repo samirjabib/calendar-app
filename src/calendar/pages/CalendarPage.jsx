@@ -14,7 +14,6 @@ export const CalendarPage = () => {
     const { openDateModal } = useUiStore(); //Import propierties and methods from custom hook.
 
     const { events, setActiveEvents } = useCalendarStore();
-    console.log(events)
     
 
     const [lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week') 
