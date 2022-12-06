@@ -113,6 +113,7 @@ export const CalendarModal = () => {
                 <div className="flex flex-col mb-2">
                     <label className='font-medium'>Start date and time</label>
                     <DatePicker
+                        minDate={() => new Date()}
                         selected={formValues.start}
                         className="w-full border-b-[1px] border-gray-200 p-2" 
                         onChange={(event) => onDateChanged(event, 'start')}

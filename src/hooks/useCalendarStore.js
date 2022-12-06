@@ -10,16 +10,24 @@ export const useCalendarStore = () => {
     const dispatch = useDispatch();
     const { events, activeEvent } = useSelector(state  => state.calendar)
     const { user } = useSelector( state => state.auth )
-    console.log(activeEvent)
 
     const setActiveEvent = (calendarEvent) => { 
         dispatch(onSetActiveEvent(calendarEvent)); //return data to reducers with dispatch hook..
     }
 
     const startAddEvent = async( calendarEvent ) => {
-        //TODO: GO TO BACK
-        console.log(calendarEvent)
+        try{
+            if(calendarEvent.id){
+                console.log('this event exists')
+                return
+            };
 
+            const { data } = await calendarApi.post('/events', calendarEvent);
+            console.log(data);
+            dispatch( onAddEvent({...calendarEvent, id: data.event.id, user})) 
+        } catch(error) {
+            console.log(error)
+        }
     }
 
 
