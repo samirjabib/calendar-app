@@ -1,4 +1,4 @@
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import { onSetActiveEvent, onAddEvent , onUpdateEvent, onDeleteEvent, onLoadEvents } from "../store";
 import Swal from "sweetalert2";
 import { calendarApi } from "../api";
@@ -38,7 +38,7 @@ export const useCalendarStore = () => {
             await calendarApi.delete(`/events/${id}`);
             console.log(activeEvent.id)
 
-            // dispatch( onDeleteEvent());
+            dispatch( onDeleteEvent());
             console.log('delete event')
         } catch(error){
             console.log(error);
