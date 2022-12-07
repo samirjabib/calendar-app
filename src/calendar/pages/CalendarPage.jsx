@@ -55,11 +55,9 @@ export const CalendarPage = () => {
     }
 
     useEffect( () => {
-        console.log('loading events')
         startLoadingEvents();
     }, [])
 
-    
     return(
         <>
             <div className="p-4 relative">

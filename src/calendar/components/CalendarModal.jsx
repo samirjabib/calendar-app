@@ -27,7 +27,7 @@ const initialForm = {
 export const CalendarModal = () => {
 
     const { closeDateModal, isDateModalOpen } = useUiStore(); //Import propierties and methos from custom hook
-    const { activeEvent, startAddEvent } = useCalendarStore()
+    const { activeEvent, startAddEvent, startDeletingEvent } = useCalendarStore()
 
     const [ formSubmitted, setFormSubmitted ] = useState(true)
 
@@ -75,6 +75,7 @@ export const CalendarModal = () => {
     }
 
     const deleteEvent = () => {
+        startDeletingEvent()
     }
 
     const onSubmit = async ( event )=> {
@@ -185,7 +186,7 @@ export const CalendarModal = () => {
                     >
             
                         <span className='font-semibold'
-                            onClick={deleteEvent()}
+                            onClick={deleteEvent}
                         
                         >Delete</span>
                     </button>

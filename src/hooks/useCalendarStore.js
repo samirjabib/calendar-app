@@ -19,15 +19,16 @@ export const useCalendarStore = () => {
     const startAddEvent = async( calendarEvent ) => {
         try{
             if(calendarEvent.id){
-                console.log('this event exists')
-                return
+                await calendarApi.put(`/events/${activeEvent.id}`, calendarEvent);
+                dispatch(onUpdateEvent(...calendarEvent, user))
+                console.log('event update')
             };
 
             const { data } = await calendarApi.post('/events', calendarEvent);
             console.log(data);
             dispatch( onAddEvent({...calendarEvent, id: data.event.id, user})) 
         } catch(error) {
-            console.log(error)
+            Swal.fire('note has created', '', 'success')
         }
     };
 
@@ -35,9 +36,10 @@ export const useCalendarStore = () => {
         try{
             await calendarApi.delete(`/events/${activeEvent.id}`);
             dispatch( onDeleteEvent());
+            console.log(deleting)
         } catch(error){
             console.log(error);
-            Swal.fire('error when deleting ')
+            Swal.fire('error when deleting', error.response.data.msg, 'error')
         }
     }
 
