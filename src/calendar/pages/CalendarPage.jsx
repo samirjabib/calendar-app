@@ -8,12 +8,13 @@ import { CalendarModal } from "../";
 import { useUiStore } from "../../hooks";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
 import { onSetActiveEvent } from "../../store";
+import { useEffect } from "react";
 
 export const CalendarPage = () => {
 
     const { openDateModal } = useUiStore(); //Import propierties and methods from custom hook.
 
-    const { events, setActiveEvent } = useCalendarStore();
+    const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
     
 
     const [lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week') 
@@ -53,6 +54,10 @@ export const CalendarPage = () => {
         localStorage.setItem('lastView', event); //we save in the localstorage the view when this change
     }
 
+    useEffect( () => {
+        console.log('loading events')
+        startLoadingEvents();
+    }, [])
 
     
     return(
