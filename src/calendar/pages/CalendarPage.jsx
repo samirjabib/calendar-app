@@ -9,8 +9,11 @@ import { useUiStore } from "../../hooks";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
 import { onSetActiveEvent } from "../../store";
 import { useEffect } from "react";
+import { useAuthStore } from "../../auth";
 
 export const CalendarPage = () => {
+
+    const { user } = useAuthStore();
 
     const { openDateModal } = useUiStore(); //Import propierties and methods from custom hook.
 
@@ -26,9 +29,10 @@ export const CalendarPage = () => {
     
     const eventsStyleGetter = (event, start, end, isSelected) => {  //we will pass by props the function to the method eventPropGetter 
 
+        const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
     
         const style = { //styles event
-            backgroundColor:'#22c55e',
+            backgroundColor: isMyEvent ? '#22c55e' : '#465660',
             borderRadius:'4px',
             opacity:0.8
     
@@ -56,7 +60,7 @@ export const CalendarPage = () => {
 
     useEffect( () => {
         startLoadingEvents();
-    }, [])
+    }, [events])
 
     return(
         <>
