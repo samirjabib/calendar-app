@@ -119,6 +119,7 @@ export const CalendarModal = () => {
                         onChange={(event) => onDateChanged(event, 'start')}
                         dateFormat="Pp"
                         showTimeSelect
+                        placeholderText='Pick a date'
                     />
                 </div>
 
@@ -131,6 +132,7 @@ export const CalendarModal = () => {
                         onChange={ (event) => onDateChanged(event, 'end') }
                         dateFormat="Pp"
                         showTimeSelect
+                        placeholderText='Pick a date'
                         
                     />
                 </div>
