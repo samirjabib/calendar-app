@@ -74,7 +74,8 @@ export const CalendarModal = () => {
         closeDateModal();
     }
 
-    const deleteEvent = () => {
+    const deleteEvent = (event) => {
+        event.preventDefault()
         startDeletingEvent()
     }
 
@@ -171,7 +172,6 @@ export const CalendarModal = () => {
                         className="flex flex-row items-center justify-center border-2 px-6 gap-2 mt-2 rounded py-2
                         text-cyan-400 hover:text-cyan-500 border-[#49d9f1] hover:bg-black/10
                         "
-                        onClick={onSubmit}
                     >
                         <BsSaveFill size={15} color={'#49d9f1'}/>
                         <span className='font-semibold '>Save</span>
