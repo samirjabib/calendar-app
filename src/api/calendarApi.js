@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const calendarApi = axios.create({
-    baseURL: "https://calendar-backend-test.up.railway.app/api/v1"
+    baseURL: "https://calendar-backend-production-889f.up.railway.app/api/v1"
 });
 
 calendarApi.interceptors.request.use( config => { //Whill this funcion intercepts the request from the client to the server.
