@@ -34,7 +34,7 @@ export const LoginPage = () => {
 
     const goRegister = () => {
         console.log(goRegister)
-        navigate('/auth/register')
+        navigate('auth/register')
         console.log("me fui")
         
     };
@@ -59,9 +59,9 @@ export const LoginPage = () => {
                     />
                 <button className="flex items-center justify-center h-12 px-6 w-64 bg-cyan-400 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-cyan-500">Login</button>
                 <div className="flex mt-6 justify-center text-xs">
-                    <Link className="text-blue-400 hover:text-blue-500" >Forgot Password</Link>
+                    {/* <Link className="text-blue-400 hover:text-blue-500" >Forgot Password</Link> */}
                     <span className="mx-2 text-gray-300">/</span>
-                    <Link className="text-blue-400 hover:text-blue-500" onClick={goRegister}>Login</Link>
+                    {/* <Link className="text-blue-400 hover:text-blue-500" onClick={goRegister}>Register</Link> */}
                 </div>
             </form>
         </div>

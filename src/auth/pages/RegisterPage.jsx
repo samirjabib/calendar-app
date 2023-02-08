@@ -34,6 +34,15 @@ export const RegisterPage = () => {
         }
     }, [errorMessage])
 
+
+    const goLogin = () => {
+        console.log(goRegister)
+        navigate('auth/login')
+        console.log("me fui")
+        
+    };
+
+
     return(
         <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700 z-0">
         <form 
@@ -71,9 +80,9 @@ export const RegisterPage = () => {
                 />
             <button className="flex items-center justify-center h-12 px-6 w-64 bg-cyan-400 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-cyan-500">Register</button>
             <div className="flex mt-6 justify-center text-xs">
-                <Link className="text-blue-400 hover:text-blue-500" >Forgot Password</Link>
+                {/* <Link className="text-blue-400 hover:text-blue-500" >Forgot Password</Link>
                 <span className="mx-2 text-gray-300">/</span>
-                <Link className="text-blue-400 hover:text-blue-500" to='/login' >Login</Link>
+                <Link className="text-blue-400 hover:text-blue-500" onClick={goLogin} >Login</Link> */}
             </div>
         </form>
     </div>
