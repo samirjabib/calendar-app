@@ -1,35 +1,27 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import {  useNavigate } from 'react-router-dom'
 
 
 export const ListNavDefault = () => {
 
 
-    const navigate = useNavigate();
 
-
-
-    const onNavigateLogin = () => {
-        navigate('/auth/login')
-    }
-    
     return(
         <>
-            <li className="mx-4 my-6 md:my-0">
-            <Link to='/auth/register' className="text-xl hover:text-cyan-500 duration-500">
+            <li className="mx-4 my-6 ml-8 md:ml-0 md:my-0 ">
+            <Link to='/auth//sign-up' className="text-sm font-semibold hover:text-cyan-500 duration-500 text-black">
                 Register
             </Link>
             </li>
 
-            <button 
-            className="bg-cyan-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-cyan-500 rounded  "
-            onClick={onNavigateLogin}
-            >
-            Login
-            </button>
+            <li className="mx-4 my-6 ml-8 md:ml-0 md:my-0 text-black">
+            <NavLink to='/auth/login' className="text-sm font-semibold  hover:text-cyan-500 duration-500">
+                Login
+            </NavLink>
+            </li>
             
 
-        
+
         </>
     )
 }

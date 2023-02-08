@@ -45,7 +45,11 @@ export const useAuthStore = () => {
 
     const checkAuthToken = async() => {
        const token = localStorage.getItem('token')
-       if(!token) return console.log('no ahi token')
+       if(!token) {
+        dispatch(onLogout());
+        return console.log('no ahi token')
+       }
+       
 
        try{
             const { data } = await calendarApi.get('auth/re-validate')

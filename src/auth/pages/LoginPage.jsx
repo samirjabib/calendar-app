@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useForm } from "../../hooks/useForm";
 import { useAuthStore } from "../hooks/useAuthStore";
@@ -15,6 +15,8 @@ export const LoginPage = () => {
     const {email, password, onInputChange , onResetForm } = useForm( loginFormFields );
     const {  startLogin, errorMessage } = useAuthStore();
 
+    const navigate = useNavigate();
+
     const onSubmit = (event) => {
         event.preventDefault();
         // startLogin({ email, password });
@@ -22,12 +24,20 @@ export const LoginPage = () => {
         onResetForm(); //reset form after peticion. 
     }
 
+    
 
     useEffect( () => {
         if( errorMessage !== undefined ) {//this funciton is activated when the errorMessage state change. 
             Swal.fire('Error in the Auth', errorMessage, 'error'); //use swal for the alert.
         }
     }, [errorMessage])
+
+    const goRegister = () => {
+        console.log(goRegister)
+        navigate('/auth/register')
+        console.log("me fui")
+        
+    };
 
 
     return (
@@ -51,7 +61,7 @@ export const LoginPage = () => {
                 <div className="flex mt-6 justify-center text-xs">
                     <Link className="text-blue-400 hover:text-blue-500" >Forgot Password</Link>
                     <span className="mx-2 text-gray-300">/</span>
-                    <Link className="text-blue-400 hover:text-blue-500" to='/register' >Register</Link>
+                    <Link className="text-blue-400 hover:text-blue-500" onClick={goRegister}>Login</Link>
                 </div>
             </form>
         </div>

@@ -59,6 +59,7 @@ export const CalendarModal = () => {
             ? ''
             : 'border-red-500 rounded border-[1px]'
     },[ formValues.title, formSubmitted ])
+    console.log(titleClass)
 
     const onDateChanged = ( event, changing) =>{ /*
                                                     will us create a new fuction for date , because propierty target dont exist in the datepick 
@@ -117,11 +118,12 @@ export const CalendarModal = () => {
                     <DatePicker
                         minDate={() => new Date()}
                         selected={formValues.start}
-                        className="w-full border-b-[1px] border-gray-200 p-2" 
+                        className="w-full border-b-[1px] border-gray-200 p-2 " 
                         onChange={(event) => onDateChanged(event, 'start')}
                         dateFormat="Pp"
                         showTimeSelect
                         placeholderText='Pick a date'
+                    
                     />
                 </div>
 

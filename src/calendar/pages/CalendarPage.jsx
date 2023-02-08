@@ -63,7 +63,7 @@ export const CalendarPage = () => {
     }, [events])
 
     return(
-        <>
+        <div className="w-[24rem] sm:w-[42rem] p-4  md:w-[44rem] lg:w-[56rem]  mx-auto">
             <div className="p-4 relative">
                 <Calendar
                 localizer={localizer}
@@ -71,7 +71,8 @@ export const CalendarPage = () => {
                 defaultView = {lastView}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: 'calc( 100vh - 80px )' }}
+                className="h-[50vh] sm:h-[60vh] md:h-[70vh] m-4 "
+                // style={{ height: 'calc( 50vh - 80px ) ' }}
                 eventPropGetter={ eventsStyleGetter }
                 components={{ 
                     event:CalendarEvent
@@ -83,6 +84,6 @@ export const CalendarPage = () => {
 
             </div>
             <CalendarModal/>
-        </>
+        </div>
     )
 }

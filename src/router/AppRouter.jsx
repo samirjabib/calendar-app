@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom"
+import { Spinner } from "../ui";
 
 import { AuthRoutes, useAuthStore } from "../auth";
 import { CalendarPage } from "../calendar";
@@ -8,9 +9,9 @@ import { CalendarPage } from "../calendar";
 export const AppRouter = () => {
 
 
-    const { status, checkAuthToken } = useAuthStore();
+    const {  checkAuthToken, status } = useAuthStore();
 
-
+  
     useEffect(() => {
         checkAuthToken();
     }, [])
@@ -18,7 +19,7 @@ export const AppRouter = () => {
 
 
     if( status === 'checking'){
-        return <h3>Loading...</h3>
+        return <Spinner status={status}/>
     }
 
     return(
@@ -29,7 +30,7 @@ export const AppRouter = () => {
                     ?
                         (
                             <>
-                                <Route path="/*" element={<Navigate to="/auth/login"/>}/>
+                                <Route path="/*" element={<Navigate to="/auth/register"/>}/>
                                 <Route path="/auth/*" element={<AuthRoutes/>}/>
                             </>
                         ) 

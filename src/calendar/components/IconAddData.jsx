@@ -18,14 +18,14 @@ export const IconAddData = () => {
         <div className="flex flex-row justify-around">
              
                 <button 
-                    className='bg-green-500 text-sm shadow text-white font-[Poppins] duration-500 px-9 py-[1em]  mx-[1em] hover:bg-green-700 rounded w-42 '
+                    className='bg-green-500 text-sm shadow text-white rounded-full font-[Poppins] duration-500 px-9 py-[1em]  mx-[1em] hover:bg-green-700  w-42 '
                     onClick={openModal}
                 >
                     Add Event
                 </button>
 
                 <button 
-                    className='bg-red-500 text-sm shadow text-white font-[Poppins] duration-500 px-9 py-[1em]  mx-[1em] hover:bg-red-700 rounded w-42'
+                    className='bg-red-500 text-sm  rounded-full shadow text-white font-[Poppins] duration-500 px-9 py-[1em]  mx-[1em] hover:bg-red-700  w-42'
                     onClick={startLogout}
                 >
                     Logout

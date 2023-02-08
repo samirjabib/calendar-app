@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { ListNavDefault } from './ListNavDefault';
 import { IconAddData } from '../../calendar';
 import { useUiStore } from '../../hooks';
+import { useAuthStore } from '../../auth';
+import { useEffect } from 'react';
 
 const log = 'active'
 
@@ -11,17 +13,25 @@ export const NavBar = () => {
     
     const [ isOpen, setOpen ] = useState(false);
 
+    const { status,  user  } = useAuthStore();
 
+    const { name } = user
 
     const getListNavbar = () => {
-        if( log === 'active'){
-            return <IconAddData/>
-        } else {
+        if( status === 'not-authenticated'){
             return <ListNavDefault/>
+        } else {
+            return <IconAddData/>
         }
+      
     }
 
-    
+
+    useEffect(() => {
+        getListNavbar();
+    }, [status, user])
+
+
 
 
  
@@ -38,11 +48,11 @@ export const NavBar = () => {
 
 
     return(
-        <nav className="p-5 bg-white shadow flex justify-between md:flex md:Items-center md:justify-between z-50">
+        <nav className="p-5 bg-white shadow flex justify-between md:flex md:Items-center md:justify-around z-50">
                 {/* Logo */}
                 <div className='flex justify-between items-center '>
                     <span>
-                        <h1 className='text-2xl font-bold uppercase'>calendary</h1>
+                        <h1 className='text-2xl font-bold uppercase'>{name ? name : 'Calendary'}</h1>
                     </span>
 
                      
@@ -60,8 +70,8 @@ export const NavBar = () => {
                         md:flex md:items-center z-[-1] md:z-auto md:static 
                         absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 
                         md:pl-0  md:opacity-100 opacity-0 top-[-400px] 
-                        transition-all ease-in duration-500 
-                        ${isOpen ? 'top-[80px] opacity-100 text-white bg-gray-200 z-40 shadow-sm' : ' top-0 opacity-0 text-black bg-white z-[-1] shadow-none'}
+                        transition-all ease-in duration-500  
+                        ${isOpen ? 'top-[80px] opacity-100 text-white bg-gray-200 z-40 shadow-sm' : ' border-top-[1px] border-gray-200top-0 opacity-0 text-black bg-white z-[-1] shadow-none'}
                         
                         `}
 
