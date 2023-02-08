@@ -2,7 +2,6 @@ import { Turn as Hamburger } from 'hamburger-react'
 import { useState } from 'react';
 import { ListNavDefault } from './ListNavDefault';
 import { IconAddData } from '../../calendar';
-import { useUiStore } from '../../hooks';
 import { useAuthStore } from '../../auth';
 import { useEffect } from 'react';
 

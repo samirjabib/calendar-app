@@ -9,7 +9,7 @@ export const ListNavDefault = () => {
     return(
         <>
             <li className="mx-4 my-6 ml-8 md:ml-0 md:my-0 ">
-            <Link to='/auth//sign-up' className="text-sm font-semibold hover:text-cyan-500 duration-500 text-black">
+            <Link to='/auth/register' className="text-sm font-semibold hover:text-cyan-500 duration-500 text-black">
                 Register
             </Link>
             </li>
